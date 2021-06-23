@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_get_ctx.c                                       :+:      :+:    :+:   */
+/*   mt_putbyte.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 09:36:22 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 10:14:25 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/23 11:02:36 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/23 11:13:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_ctx.h"
+#include <stdint.h>
+#include <unistd.h>
 
-t_ctx	*mt_get_ctx(void)
+void	mt_putbyte(uint8_t byte)
 {
-	static t_ctx	ctx = {{0}, 0};
+	int	i;
 
-	return (&ctx);
+	i = 0;
+	while (++i <= 8)
+	{
+		if (byte & (1 << (8 - i)))
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+	}
+	write(1, "\n", 1);
 }
