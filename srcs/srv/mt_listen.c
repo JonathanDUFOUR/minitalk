@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   mt_listen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 00:13:25 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 09:16:51 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/23 09:12:49 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/23 09:39:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include <signal.h>
+#include "minitalk.h"
+#include "t_ctx.h"
 
-# include <unistd.h>
-# include <stdbool.h>
+void	mt_listen(int sig)
+{
+	t_ctx *const	ctx = mt_get_ctx();
 
-bool	mt_isdigit(char const c);
-bool	mt_isspace(char const c);
-
-void	mt_listen(int sig);
-
-pid_t	mt_atopid(char const *s) __attribute__((nonnull));
-
-#endif
+	(void)sig;
+	(void)ctx;
+}

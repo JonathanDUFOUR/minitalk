@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 22:30:33 by jodufour          #+#    #+#              #
-#    Updated: 2021/06/23 00:44:22 by jodufour         ###   ########.fr        #
+#    Updated: 2021/06/23 09:39:51 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,14 +31,14 @@ SRCD		=	srcs/
 OBJD		=	objs/
 INCLUDE		=	includes/
 
-CLT_SRCD	=	client/
+CLT_SRCD	=	clt/
 CLT_SRCD	:=	${addprefix ${SRCD}, ${CLT_SRCD}}
-CLT_OBJD	=	client/
+CLT_OBJD	=	${CLT_SRCD}
 CLT_OBJD	:=	${addprefix ${OBJD}, ${CLT_OBJD}}
 
-SRV_SRCD	=	server/
+SRV_SRCD	=	srv/
 SRV_SRCD	:=	${addprefix ${SRCD}, ${SRV_SRCD}}
-SRV_OBJD	=	server/
+SRV_OBJD	=	${SRV_SRCD}
 SRV_OBJD	:=	${addprefix ${OBJD}, ${SRV_OBJD}}
 
 ######################################
@@ -50,7 +50,9 @@ CMN_SRCS	=	\
 				mt_isspace.c
 
 SRV_SRCS	=	\
-				main.c
+				main.c			\
+				mt_listen.c		\
+				mt_get_ctx.c	\
 
 CLT_SRCS	=	\
 				main.c

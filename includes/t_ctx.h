@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   t_ctx.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 00:13:25 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 09:16:51 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/23 09:29:29 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/23 09:38:02 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef T_CTX_H
+# define T_CTX_H
 
-# include <unistd.h>
-# include <stdbool.h>
+typedef struct s_ctx	t_ctx;
 
-bool	mt_isdigit(char const c);
-bool	mt_isspace(char const c);
+struct s_ctx
+{
+	char	*s;
+};
 
-void	mt_listen(int sig);
-
-pid_t	mt_atopid(char const *s) __attribute__((nonnull));
+t_ctx	*mt_get_ctx(void);
 
 #endif
