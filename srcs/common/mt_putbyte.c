@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_isspace.c                                       :+:      :+:    :+:   */
+/*   mt_putbyte.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 00:37:31 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 00:39:26 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/23 11:02:36 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/25 12:10:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include <stdint.h>
+#include <unistd.h>
 
-bool	mt_isspace(char const c)
+void	mt_putbyte(uint8_t byte)
 {
-	return (c == '\f'
-		|| c == '\t'
-		|| c == '\n'
-		|| c == '\r'
-		|| c == '\v'
-		|| c == ' ');
+	int	i;
+
+	i = 0;
+	while (++i <= 8)
+	{
+		if (byte & (1 << (8 - i)))
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+	}
+	write(1, " ", 1);
 }

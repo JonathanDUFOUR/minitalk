@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_putbyte.c                                       :+:      :+:    :+:   */
+/*   t_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 11:02:36 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 11:13:21 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/25 18:13:24 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/25 21:07:58 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-#include <unistd.h>
+#ifndef T_DATA_H
+# define T_DATA_H
 
-void	mt_putbyte(uint8_t byte)
+# include <signal.h>
+
+typedef struct s_data	t_data;
+
+struct s_data
 {
-	int	i;
+	pid_t	srv_pid;
+	pid_t	clt_pid;
+	int		sig_s;
+	int		sig_r;
+	int		len;
+	char	*s;
+};
 
-	i = 0;
-	while (++i <= 8)
-	{
-		if (byte & (1 << (8 - i)))
-			write(1, "1", 1);
-		else
-			write(1, "0", 1);
-	}
-	write(1, "\n", 1);
-}
+void	mt_putdata(void);
+
+t_data	*data(void);
+
+#endif

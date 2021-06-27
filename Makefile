@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 22:30:33 by jodufour          #+#    #+#              #
-#    Updated: 2021/06/23 11:39:25 by jodufour         ###   ########.fr        #
+#    Updated: 2021/06/25 21:26:59 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,25 +31,24 @@ SRCD		=	srcs/
 OBJD		=	objs/
 INCLUDE		=	includes/
 
-CMN_SRCD	=	${SRCD}
-CMN_OBJD	=	${OBJD}
+SRV_SRCD	:=	server/
+SRV_OBJD	:=	${SRV_SRCD}
+SRV_SRCD	:=	${addprefix ${SRCD}, ${SRV_SRCD}}
+SRV_OBJD	:=	${addprefix ${OBJD}, ${SRV_OBJD}}
 
-CLT_SRCD	=	clt/
+CLT_SRCD	:=	client/
+CLT_OBJD	:=	${CLT_SRCD}
 CLT_SRCD	:=	${addprefix ${SRCD}, ${CLT_SRCD}}
-CLT_OBJD	=	${CLT_SRCD}
 CLT_OBJD	:=	${addprefix ${OBJD}, ${CLT_OBJD}}
 
-SRV_SRCD	=	srv/
-SRV_SRCD	:=	${addprefix ${SRCD}, ${SRV_SRCD}}
-SRV_OBJD	=	${SRV_SRCD}
-SRV_OBJD	:=	${addprefix ${OBJD}, ${SRV_OBJD}}
+CMN_SRCD	:=	common/
+CMN_OBJD	:=	${CMN_SRCD}
+CMN_SRCD	:=	${addprefix ${SRCD}, ${CMN_SRCD}}
+CMN_OBJD	:=	${addprefix ${OBJD}, ${CMN_OBJD}}
 
 ######################################
 #            SOURCE FILES            #
 ######################################
-CMN_SRCS	=	\
-				mt_putbyte.c
-
 SRV_SRCS	=	\
 				main.c			\
 				mt_get_ctx.c	\
@@ -59,23 +58,31 @@ CLT_SRCS	=	\
 				main.c			\
 				mt_atopid.c		\
 				mt_isdigit.c	\
-				mt_isspace.c
+				mt_isspace.c	\
+				mt_talk.c
+
+CMN_SRCS	=	\
+				data.c			\
+				mt_bzero.c		\
+				mt_putbyte.c	\
+				mt_putdata.c	\
+				mt_strlen.c
 
 ######################################
 #            OBJECT FILES            #
 ######################################
-CMN_OBJS	=	${CMN_SRCS:.c=.o}
-CMN_OBJS	:=	${addprefix ${CMN_OBJD}, ${CMN_OBJS}}
-
 SRV_OBJS	=	${SRV_SRCS:.c=.o}
 SRV_OBJS	:=	${addprefix ${SRV_OBJD}, ${SRV_OBJS}}
 
 CLT_OBJS	=	${CLT_SRCS:.c=.o}
 CLT_OBJS	:=	${addprefix ${CLT_OBJD}, ${CLT_OBJS}}
 
-CMN_DEPS	=	${CMN_OBJS:.o=.d}
+CMN_OBJS	=	${CMN_SRCS:.c=.o}
+CMN_OBJS	:=	${addprefix ${CMN_OBJD}, ${CMN_OBJS}}
+
 SRV_DEPS	=	${SRV_OBJS:.o=.d}
 CLT_DEPS	=	${CLT_OBJS:.o=.d}
+CMN_DEPS	=	${CMN_OBJS:.o=.d}
 
 #######################################
 #                FLAGS                #
@@ -99,13 +106,6 @@ ${SRV}:	${SRV_OBJS} ${CMN_OBJS}
 ${CLT}:	${CLT_OBJS} ${CMN_OBJS}
 	${LINKER} $@ ${LDFLAGS} $^
 
--include ${CMN_DEPS}
-
-${CMN_OBJD}%.o:	${CMN_SRCD}%.c
-	@${MAKEDIR} ${OBJD}
-	@${MAKEDIR} ${CMN_OBJD}
-	${CC} $@ ${CFLAGS} $<
-
 -include ${SRV_DEPS}
 
 ${SRV_OBJD}%.o:	${SRV_SRCD}%.c
@@ -118,6 +118,13 @@ ${SRV_OBJD}%.o:	${SRV_SRCD}%.c
 ${CLT_OBJD}%.o:	${CLT_SRCD}%.c
 	@${MAKEDIR} ${OBJD}
 	@${MAKEDIR} ${CLT_OBJD}
+	${CC} $@ ${CFLAGS} $<
+
+-include ${CMN_DEPS}
+
+${CMN_OBJD}%.o:	${CMN_SRCD}%.c
+	@${MAKEDIR} ${OBJD}
+	@${MAKEDIR} ${CMN_OBJD}
 	${CC} $@ ${CFLAGS} $<
 
 clean:

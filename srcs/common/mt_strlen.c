@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_isdigit.c                                       :+:      :+:    :+:   */
+/*   mt_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 00:35:12 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 00:36:11 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/25 18:01:50 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/25 18:06:27 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-
-bool	mt_isdigit(char const c)
+int	mt_strlen(char const *s)
 {
-	return (c >= '0' && c <= '9');
+	register char const	*p = s;
+
+	while (*p)
+		++p;
+	return (p - s);
 }

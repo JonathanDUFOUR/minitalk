@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_get_ctx.c                                       :+:      :+:    :+:   */
+/*   t_sig.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 09:36:22 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 10:14:25 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/24 11:51:30 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/24 15:53:52 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_ctx.h"
+#ifndef T_SIG_H
+# define T_SIG_H
 
-t_ctx	*mt_get_ctx(void)
-{
-	static t_ctx	ctx = {{0}, 0};
+# include <signal.h>
 
-	return (&ctx);
-}
+typedef struct sigaction	t_sig;
+
+#endif

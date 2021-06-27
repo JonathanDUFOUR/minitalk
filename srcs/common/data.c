@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_atopid.c                                        :+:      :+:    :+:   */
+/*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 00:24:43 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 00:45:00 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/25 18:31:40 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/25 20:45:24 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "minitalk.h"
+#include <stdlib.h>
+#include "t_data.h"
 
-pid_t	mt_atopid(char const *s)
+t_data	*data(void)
 {
-	pid_t	output;
+	static t_data	data = {0, 0, 0, 0, 0, NULL};
 
-	output = 0;
-	while (mt_isspace(*s))
-		++s;
-	while (mt_isdigit(*s))
-	{
-		output *= 10;
-		output += *s - '0';
-		++s;
-	}
-	return (output);
+	return (&data);
 }
