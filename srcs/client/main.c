@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 23:00:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/26 18:41:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/06/28 07:26:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ int	main(int ac, char **av)
 {
 	if (ac == 3)
 	{
-		printf("\n\e[33m>>> RUNNING CLIENT <<<\e[0m\n");
+		write(1, "\n\e[33m>>> RUNNING CLIENT <<<\e[0m\n", 34);
 		mt_data_init(av[1], av[2]);
 		mt_putdata();
 		mt_talk();
 	}
 	else
-		printf("\e[31mError:\n\e[33mUsage: ./client <server_pid> <string>\e[0m\n");
+	{
+		write(1, "\e[31mError:\n\e[0m", 17);
+		write(1, "\e[33mUsage: ./client <server_pid> <string>\e[0m\n", 48);
+	}
 	return (0);
 }

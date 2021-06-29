@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   t_lst.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 23:01:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 07:57:48 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/27 21:59:03 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/28 03:31:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include "minitalk.h"
-#include "t_data.h"
+#ifndef T_LST_H
+# define T_LST_H
 
-int	main(void)
+# include <stdbool.h>
+# include <signal.h>
+# include <string.h>
+# include "t_clt.h"
+
+typedef struct s_lst	t_lst;
+
+struct s_lst
 {
-	write(1, "\n\e[33m>>> RUNNING SERVER <<<\e[0m\n", 34);
-	data()->srv_pid = getpid();
-	mt_putdata();
-	mt_listen();
-	return (0);
-}
+	void	*head;
+	void	*tail;
+	size_t	size;
+};
+
+int		mt_lst_addback(pid_t clt_pid);
+
+void	mt_lst_delone(pid_t clt_pid);
+void	mt_lst_clear(void);
+
+t_lst	*lst(void);
+
+#endif

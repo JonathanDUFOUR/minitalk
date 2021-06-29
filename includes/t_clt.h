@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   t_clt.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 23:01:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 07:57:48 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/23 09:29:29 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/28 07:03:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include "minitalk.h"
-#include "t_data.h"
+#ifndef T_CLT_H
+# define T_CLT_H
 
-int	main(void)
+# include <signal.h>
+
+# define BUFF_SIZE 1024
+
+typedef struct s_clt	t_clt;
+
+struct s_clt
 {
-	write(1, "\n\e[33m>>> RUNNING SERVER <<<\e[0m\n", 34);
-	data()->srv_pid = getpid();
-	mt_putdata();
-	mt_listen();
-	return (0);
-}
+	char	buff[BUFF_SIZE];
+	int		i;
+	pid_t	pid;
+	t_clt	*next;
+};
+
+t_clt	*mt_get_clt(pid_t clt_pid);
+
+#endif

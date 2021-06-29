@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 18:31:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/25 20:45:24 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/06/28 07:41:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_data	*data(void)
 {
-	static t_data	data = {0, 0, 0, 0, 0, NULL};
+	static t_data	data = {-1, -1, 0, 0, 0, NULL};
 
 	return (&data);
 }

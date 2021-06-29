@@ -6,26 +6,30 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:02:33 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/25 21:07:48 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/06/28 08:04:06 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <signal.h>
+#include "minitalk.h"
 #include "t_data.h"
 
 void	mt_putdata(void)
 {
-	printf(".-------------------------------------------.\n");
-	printf("|\e[35m%20s\e[0m |\e[35m%20s\e[0m |\n", "VARIABLE", "VALUE");
-	printf("|-------------------------------------------|\n");
-	printf("|%20s |%20.0d |\n", "server_pid", data()->srv_pid);
-	printf("|-------------------------------------------|\n");
-	printf("|%20s |%20.0d |\n", "client_pid", data()->clt_pid);
-	printf("|-------------------------------------------|\n");
-	printf("|%20s |%20.0d |\n", "sent signal", data()->sig_s);
-	printf("|-------------------------------------------|\n");
-	printf("|%20s |%20.0d |\n", "received signal", data()->sig_r);
-	printf("'-------------------------------------------'\n");
-	printf("\n");
+	write(1, "-----------------------------------------\n", 43);
+	write(1, "      \e[35mVARIABLE\e[0m     |       \e[35mVALUE\e[0m        \n", 60);
+	write(1, "-----------------------------------------\n", 43);
+	write(1, "     server_pid    |       ", 28);
+	mt_putpid(data()->srv_pid);
+	write(1, "\n", 1);
+	write(1, "-----------------------------------------\n", 43);
+	if (data()->clt_pid >= 0)
+	{
+		write(1, "     client_pid    |       ", 28);
+		mt_putpid(data()->clt_pid);
+		write(1, "\n", 1);
+		write(1, "-----------------------------------------\n", 43);
+	}
+	write(1, "\n", 1);
 }

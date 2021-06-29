@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mt_lst_addback.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 23:01:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 07:57:48 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/27 23:38:01 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/28 02:27:48 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include <stdlib.h>
 #include <signal.h>
 #include "minitalk.h"
-#include "t_data.h"
+#include "t_lst.h"
 
-int	main(void)
+int	mt_lst_addback(pid_t clt_pid)
 {
-	write(1, "\n\e[33m>>> RUNNING SERVER <<<\e[0m\n", 34);
-	data()->srv_pid = getpid();
-	mt_putdata();
-	mt_listen();
-	return (0);
+	t_clt	*new;
+
+	new = malloc(sizeof(t_clt));
+	if (!new)
+		return (MALLOC_ERRNO);
+	mt_bzero(new->buff, BUFF_SIZE);
+	new->i = 0;
+	new->pid = clt_pid;
+	new->next = NULL;
+	if (lst()->tail)
+		((t_clt *)lst()->tail)->next = new;
+	else
+	{
+		lst()->head = new;
+		lst()->tail = new;
+	}
+	lst()->tail = new;
+	++lst()->size;
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 22:30:33 by jodufour          #+#    #+#              #
-#    Updated: 2021/06/25 21:26:59 by jodufour         ###   ########.fr        #
+#    Updated: 2021/06/28 04:04:48 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,14 @@ CMN_OBJD	:=	${addprefix ${OBJD}, ${CMN_OBJD}}
 #            SOURCE FILES            #
 ######################################
 SRV_SRCS	=	\
-				main.c			\
-				mt_get_ctx.c	\
-				mt_listen.c
+				lst.c				\
+				main.c				\
+				mt_get_clt.c		\
+				mt_listen.c			\
+				mt_lst_addback.c	\
+				mt_lst_clear.c		\
+				mt_lst_delone.c		\
+				mt_quit.c
 
 CLT_SRCS	=	\
 				main.c			\
@@ -66,6 +71,7 @@ CMN_SRCS	=	\
 				mt_bzero.c		\
 				mt_putbyte.c	\
 				mt_putdata.c	\
+				mt_putpid.c		\
 				mt_strlen.c
 
 ######################################

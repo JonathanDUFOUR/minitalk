@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mt_quit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 23:01:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 07:57:48 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/28 02:32:40 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/28 08:01:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
-#include <signal.h>
-#include "minitalk.h"
-#include "t_data.h"
+#include <stdlib.h>
+#include "t_lst.h"
 
-int	main(void)
+void	mt_quit(int sig)
 {
-	write(1, "\n\e[33m>>> RUNNING SERVER <<<\e[0m\n", 34);
-	data()->srv_pid = getpid();
-	mt_putdata();
-	mt_listen();
-	return (0);
+	write(1, "\n\e[33m>>> SERVER SHUTDOWN <<<\e[0m\n\n", 36);
+	mt_lst_clear();
+	exit(sig);
 }

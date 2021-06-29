@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clt.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 23:01:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 07:57:48 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/27 23:26:09 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/28 04:04:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include <signal.h>
-#include "minitalk.h"
-#include "t_data.h"
+#include "t_lst.h"
 
-int	main(void)
+t_clt	*mt_get_clt(pid_t clt_pid)
 {
-	write(1, "\n\e[33m>>> RUNNING SERVER <<<\e[0m\n", 34);
-	data()->srv_pid = getpid();
-	mt_putdata();
-	mt_listen();
-	return (0);
+	t_clt	*clt;
+
+	clt = (t_clt *)lst()->head;
+	while (clt)
+	{
+		if (clt->pid == clt_pid)
+			return (clt);
+		clt = clt->next;
+	}
+	return (NULL);
 }

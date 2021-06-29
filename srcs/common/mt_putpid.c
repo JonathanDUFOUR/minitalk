@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mt_putpid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 23:01:10 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 07:57:48 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/28 03:14:15 by jodufour          #+#    #+#             */
+/*   Updated: 2021/06/28 07:40:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
-#include "minitalk.h"
-#include "t_data.h"
 
-int	main(void)
+void	mt_putpid(pid_t pid)
 {
-	write(1, "\n\e[33m>>> RUNNING SERVER <<<\e[0m\n", 34);
-	data()->srv_pid = getpid();
-	mt_putdata();
-	mt_listen();
-	return (0);
+	char	d;
+
+	if (pid < 0)
+		return ;
+	else
+	{
+		d = pid % 10 + '0';
+		if (pid > 9)
+			mt_putpid(pid / 10);
+		write(1, &d, 1);
+	}
 }
