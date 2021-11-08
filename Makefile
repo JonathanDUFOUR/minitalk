@@ -6,15 +6,15 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 22:30:33 by jodufour          #+#    #+#              #
-#    Updated: 2021/06/28 04:04:48 by jodufour         ###   ########.fr        #
+#    Updated: 2021/11/08 10:29:42 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################################
 #              COMMANDS              #
 ######################################
-CC			=	gcc -c -o
-LINKER		=	gcc -o
+CC			=	clang -c -o
+LINKER		=	clang -o
 MAKEDIR		=	mkdir -p
 RM			=	rm -rf
 
