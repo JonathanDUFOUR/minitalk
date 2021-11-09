@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_get_ctx.c                                       :+:      :+:    :+:   */
+/*   e_ret.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 09:36:22 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/23 10:14:25 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/08 17:09:28 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/09 07:57:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_ctx.h"
+#ifndef E_RET_H
+# define E_RET_H
 
-t_ctx	*mt_get_ctx(void)
+enum	e_ret
 {
-	static t_ctx	ctx = {{0}, 0};
+	SUCCESS,
+	MALLOC_ERR
+};
 
-	return (&ctx);
-}
+#endif

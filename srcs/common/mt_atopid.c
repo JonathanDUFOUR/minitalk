@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mt_lst_addback.c                                   :+:      :+:    :+:   */
+/*   mt_atopid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/27 23:38:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 02:27:48 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/23 00:24:43 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/09 07:42:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <signal.h>
 #include "minitalk.h"
-#include "t_lst.h"
 
-int	mt_lst_addback(pid_t clt_pid)
+__pid_t	mt_atopid(char const *str)
 {
-	t_clt	*new;
+	__pid_t	output;
 
-	new = malloc(sizeof(t_clt));
-	if (!new)
-		return (MALLOC_ERRNO);
-	mt_bzero(new->buff, BUFF_SIZE);
-	new->i = 0;
-	new->pid = clt_pid;
-	new->next = NULL;
-	if (lst()->tail)
-		((t_clt *)lst()->tail)->next = new;
-	else
+	output = 0;
+	while (mt_isspace(*str))
+		++str;
+	while (mt_isdigit(*str))
 	{
-		lst()->head = new;
-		lst()->tail = new;
+		output *= 10;
+		output += *str - '0';
+		++str;
 	}
-	lst()->tail = new;
-	++lst()->size;
-	return (SUCCESS);
+	return (output);
 }

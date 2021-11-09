@@ -6,17 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 02:32:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 08:01:55 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:23:11 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "t_lst.h"
+#include "colors.h"
+#include "minitalk.h"
 
 void	mt_quit(int sig)
 {
-	write(1, "\n\e[33m>>> SERVER SHUTDOWN <<<\e[0m\n\n", 36);
-	mt_lst_clear();
+	write(1, "\n"YELLOW">>> SERVER SHUTDOWN <<<"RESET"\n\n", 35);
 	exit(sig);
 }

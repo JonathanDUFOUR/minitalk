@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_clt.h                                            :+:      :+:    :+:   */
+/*   t_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 09:29:29 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 07:03:49 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/25 18:13:24 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/09 07:59:18 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_CLT_H
-# define T_CLT_H
+#ifndef T_DATA_H
+# define T_DATA_H
 
-# include <signal.h>
+# include <unistd.h>
 
-# define BUFF_SIZE 1024
+typedef struct s_data	t_data;
 
-typedef struct s_clt	t_clt;
-
-struct s_clt
+struct s_data
 {
-	char	buff[BUFF_SIZE];
-	int		i;
-	pid_t	pid;
-	t_clt	*next;
+	__pid_t	srv_pid;
+	__pid_t	clt_pid;
+	int		sig_s;
+	int		sig_r;
+	int		len;
+	char	*str;
 };
 
-t_clt	*mt_get_clt(pid_t clt_pid);
+void	mt_data_init(char const *av1, char const *av2);
+void	mt_data_print(void);
+
+t_data	*mt_data_get(void);
 
 #endif

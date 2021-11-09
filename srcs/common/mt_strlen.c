@@ -6,15 +6,15 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 18:01:50 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/25 18:06:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/09 08:14:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	mt_strlen(char const *s)
+int	mt_strlen(char const *str)
 {
-	register char const	*p = s;
+	register char const	*ptr = str;
 
-	while (*p)
-		++p;
-	return (p - s);
+	while (*ptr)
+		++ptr;
+	return (ptr - str);
 }

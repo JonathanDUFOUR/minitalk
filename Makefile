@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 22:30:33 by jodufour          #+#    #+#              #
-#    Updated: 2021/11/08 10:29:42 by jodufour         ###   ########.fr        #
+#    Updated: 2021/11/09 17:46:23 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@
 #              COMMANDS              #
 ######################################
 CC			=	clang -c -o
-LINKER		=	clang -o
-MAKEDIR		=	mkdir -p
+LINK		=	clang -o
+MKDIR		=	mkdir -p
 RM			=	rm -rf
 
 ######################################
@@ -27,76 +27,76 @@ SRV			=	server
 #######################################
 #             DIRECTORIES             #
 #######################################
-SRCD		=	srcs/
-OBJD		=	objs/
-INCLUDE		=	includes/
+SRC_DIR		=	srcs/
+OBJ_DIR		=	objs/
+PRV_DIR		=	private/
 
-SRV_SRCD	:=	server/
-SRV_OBJD	:=	${SRV_SRCD}
-SRV_SRCD	:=	${addprefix ${SRCD}, ${SRV_SRCD}}
-SRV_OBJD	:=	${addprefix ${OBJD}, ${SRV_OBJD}}
+SRV_SRC_DIR	:=	server/
+SRV_OBJ_DIR	:=	${SRV_SRC_DIR}
+SRV_SRC_DIR	:=	${addprefix ${SRC_DIR}, ${SRV_SRC_DIR}}
+SRV_OBJ_DIR	:=	${addprefix ${OBJ_DIR}, ${SRV_OBJ_DIR}}
 
-CLT_SRCD	:=	client/
-CLT_OBJD	:=	${CLT_SRCD}
-CLT_SRCD	:=	${addprefix ${SRCD}, ${CLT_SRCD}}
-CLT_OBJD	:=	${addprefix ${OBJD}, ${CLT_OBJD}}
+CLT_SRC_DIR	:=	client/
+CLT_OBJ_DIR	:=	${CLT_SRC_DIR}
+CLT_SRC_DIR	:=	${addprefix ${SRC_DIR}, ${CLT_SRC_DIR}}
+CLT_OBJ_DIR	:=	${addprefix ${OBJ_DIR}, ${CLT_OBJ_DIR}}
 
-CMN_SRCD	:=	common/
-CMN_OBJD	:=	${CMN_SRCD}
-CMN_SRCD	:=	${addprefix ${SRCD}, ${CMN_SRCD}}
-CMN_OBJD	:=	${addprefix ${OBJD}, ${CMN_OBJD}}
+CMN_SRC_DIR	:=	common/
+CMN_OBJ_DIR	:=	${CMN_SRC_DIR}
+CMN_SRC_DIR	:=	${addprefix ${SRC_DIR}, ${CMN_SRC_DIR}}
+CMN_OBJ_DIR	:=	${addprefix ${OBJ_DIR}, ${CMN_OBJ_DIR}}
 
 ######################################
 #            SOURCE FILES            #
 ######################################
-SRV_SRCS	=	\
-				lst.c				\
-				main.c				\
-				mt_get_clt.c		\
-				mt_listen.c			\
-				mt_lst_addback.c	\
-				mt_lst_clear.c		\
-				mt_lst_delone.c		\
+SRV_SRC		=	\
+				main.c			\
+				mt_listen.c		\
 				mt_quit.c
 
-CLT_SRCS	=	\
+CLT_SRC		=	\
 				main.c			\
-				mt_atopid.c		\
-				mt_isdigit.c	\
-				mt_isspace.c	\
 				mt_talk.c
 
-CMN_SRCS	=	\
-				data.c			\
-				mt_bzero.c		\
-				mt_putbyte.c	\
-				mt_putdata.c	\
-				mt_putpid.c		\
+CMN_SRC		=	\
+				${addprefix data/,	\
+					mt_data_get.c	\
+					mt_data_init.c	\
+					mt_data_print.c	\
+				}					\
+				mt_atopid.c			\
+				mt_bzero.c			\
+				mt_isdigit.c		\
+				mt_isspace.c		\
+				mt_putpid.c			\
 				mt_strlen.c
 
 ######################################
 #            OBJECT FILES            #
 ######################################
-SRV_OBJS	=	${SRV_SRCS:.c=.o}
-SRV_OBJS	:=	${addprefix ${SRV_OBJD}, ${SRV_OBJS}}
+SRV_OBJ		=	${SRV_SRC:.c=.o}
+SRV_OBJ		:=	${addprefix ${SRV_OBJ_DIR}, ${SRV_OBJ}}
 
-CLT_OBJS	=	${CLT_SRCS:.c=.o}
-CLT_OBJS	:=	${addprefix ${CLT_OBJD}, ${CLT_OBJS}}
+CLT_OBJ		=	${CLT_SRC:.c=.o}
+CLT_OBJ		:=	${addprefix ${CLT_OBJ_DIR}, ${CLT_OBJ}}
 
-CMN_OBJS	=	${CMN_SRCS:.c=.o}
-CMN_OBJS	:=	${addprefix ${CMN_OBJD}, ${CMN_OBJS}}
+CMN_OBJ		=	${CMN_SRC:.c=.o}
+CMN_OBJ		:=	${addprefix ${CMN_OBJ_DIR}, ${CMN_OBJ}}
 
-SRV_DEPS	=	${SRV_OBJS:.o=.d}
-CLT_DEPS	=	${CLT_OBJS:.o=.d}
-CMN_DEPS	=	${CMN_OBJS:.o=.d}
+SRV_DEP		=	${SRV_OBJ:.o=.d}
+CLT_DEP		=	${CLT_OBJ:.o=.d}
+CMN_DEP		=	${CMN_OBJ:.o=.d}
 
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS		=	-Wall -Wextra -MMD -I${INCLUDE}
+CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		+=	-MMD -MP
+CFLAGS		+=	-I${PRV_DIR}
+
 LDFLAGS		=	
 
-ifeq (DEBUG, true)
+ifeq (${DEBUG}, 1)
 	CFLAGS	+=	-g
 endif
 
@@ -106,39 +106,29 @@ endif
 
 all:	${SRV} ${CLT}
 
-${SRV}:	${SRV_OBJS} ${CMN_OBJS}
-	${LINKER} $@ ${LDFLAGS} $^
+${SRV}:	${SRV_OBJ} ${CMN_OBJ}
+	${LINK} $@ ${LDFLAGS} $^
 
-${CLT}:	${CLT_OBJS} ${CMN_OBJS}
-	${LINKER} $@ ${LDFLAGS} $^
+${CLT}:	${CLT_OBJ} ${CMN_OBJ}
+	${LINK} $@ ${LDFLAGS} $^
 
--include ${SRV_DEPS}
-
-${SRV_OBJD}%.o:	${SRV_SRCD}%.c
-	@${MAKEDIR} ${OBJD}
-	@${MAKEDIR} ${SRV_OBJD}
-	${CC} $@ ${CFLAGS} $<
-
+-include ${SRV_DEP}
 -include ${CLT_DEPS}
-
-${CLT_OBJD}%.o:	${CLT_SRCD}%.c
-	@${MAKEDIR} ${OBJD}
-	@${MAKEDIR} ${CLT_OBJD}
-	${CC} $@ ${CFLAGS} $<
-
 -include ${CMN_DEPS}
 
-${CMN_OBJD}%.o:	${CMN_SRCD}%.c
-	@${MAKEDIR} ${OBJD}
-	@${MAKEDIR} ${CMN_OBJD}
+${OBJ_DIR}%.o:	${SRC_DIR}%.c
+	@${MKDIR} ${@D}
 	${CC} $@ ${CFLAGS} $<
 
 clean:
-	${RM} ${OBJD}
+	${RM} ${OBJ_DIR}
 
 fclean:
-	${RM} ${OBJD} ${CLT} ${SRV}
+	${RM} ${OBJ_DIR} ${CLT} ${SRV}
 
 re:	fclean all
+
+-include /home/jodufour/Templates/mk_files/coffee.mk
+-include /home/jodufour/Templates/mk_files/norm.mk
 
 .PHONY:	all clean fclean re

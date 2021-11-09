@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lst.h                                            :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/27 21:59:03 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/28 03:31:01 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/08 11:05:29 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/09 08:08:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_LST_H
-# define T_LST_H
+#ifndef COLORS_H
+# define COLORS_H
 
-# include <stdbool.h>
-# include <signal.h>
-# include <string.h>
-# include "t_clt.h"
-
-typedef struct s_lst	t_lst;
-
-struct s_lst
-{
-	void	*head;
-	void	*tail;
-	size_t	size;
-};
-
-int		mt_lst_addback(pid_t clt_pid);
-
-void	mt_lst_delone(pid_t clt_pid);
-void	mt_lst_clear(void);
-
-t_lst	*lst(void);
+# define BLACK		"\e[30m"
+# define RED		"\e[31m"
+# define GREEN		"\e[32m"
+# define YELLOW		"\e[33m"
+# define BLUE		"\e[34m"
+# define MAGENTA	"\e[35m"
+# define CYAN		"\e[36m"
+# define WHITE		"\e[37m"
+# define RESET		"\e[0m"
 
 #endif

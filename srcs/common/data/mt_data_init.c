@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst.c                                              :+:      :+:    :+:   */
+/*   mt_data_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/27 22:01:02 by jodufour          #+#    #+#             */
-/*   Updated: 2021/06/27 22:01:54 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/08 17:13:31 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/09 08:05:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_lst.h"
+#include "minitalk.h"
+#include "type/t_data.h"
 
-t_lst	*lst(void)
+void	mt_data_init(char const *av1, char const *av2)
 {
-	static t_lst	lst = {NULL, NULL, 0};
+	t_data *const	data = mt_data_get();
 
-	return (&lst);
+	data->srv_pid = mt_atopid(av1);
+	data->clt_pid = getpid();
+	data->str = (char *)av2;
+	data->len = mt_strlen(data->str);
 }
