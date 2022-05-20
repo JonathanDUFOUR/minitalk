@@ -6,23 +6,23 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 22:30:33 by jodufour          #+#    #+#              #
-#    Updated: 2021/11/09 17:46:23 by jodufour         ###   ########.fr        #
+#    Updated: 2022/05/19 02:56:34 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################################
 #              COMMANDS              #
 ######################################
-CC			=	clang -c -o
-LINK		=	clang -o
+CC			=	clang
+LINK		=	clang
 MKDIR		=	mkdir -p
 RM			=	rm -rf
 
 ######################################
 #             EXECUTABLE             #
 ######################################
-CLT			=	client
-SRV			=	server
+CLT			=	client.out
+SRV			=	server.out
 
 #######################################
 #             DIRECTORIES             #
@@ -50,12 +50,12 @@ CMN_OBJ_DIR	:=	${addprefix ${OBJ_DIR}, ${CMN_OBJ_DIR}}
 #            SOURCE FILES            #
 ######################################
 SRV_SRC		=	\
-				main.c			\
-				mt_listen.c		\
+				main.c				\
+				mt_listen.c			\
 				mt_quit.c
 
 CLT_SRC		=	\
-				main.c			\
+				main.c				\
 				mt_talk.c
 
 CMN_SRC		=	\
@@ -90,7 +90,8 @@ CMN_DEP		=	${CMN_OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-c
+CFLAGS		+=	-Wall -Wextra -Werror
 CFLAGS		+=	-MMD -MP
 CFLAGS		+=	-I${PRV_DIR}
 
@@ -103,22 +104,23 @@ endif
 #######################################
 #                RULES                #
 #######################################
+.PHONY: all clean fclean re fre
 
-all:	${SRV} ${CLT}
+${SRV}: ${SRV_OBJ} ${CMN_OBJ}
+	${LINK} $^ ${LDFLAGS} ${OUTPUT_OPTION}
 
-${SRV}:	${SRV_OBJ} ${CMN_OBJ}
-	${LINK} $@ ${LDFLAGS} $^
+${CLT}: ${CLT_OBJ} ${CMN_OBJ}
+	${LINK} $^ ${LDFLAGS} ${OUTPUT_OPTION}
 
-${CLT}:	${CLT_OBJ} ${CMN_OBJ}
-	${LINK} $@ ${LDFLAGS} $^
+all: ${SRV} ${CLT}
 
 -include ${SRV_DEP}
--include ${CLT_DEPS}
--include ${CMN_DEPS}
+-include ${CLT_DEP}
+-include ${CMN_DEP}
 
-${OBJ_DIR}%.o:	${SRC_DIR}%.c
+${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${MKDIR} ${@D}
-	${CC} $@ ${CFLAGS} $<
+	${CC} $< ${CFLAGS} ${OUTPUT_OPTION}
 
 clean:
 	${RM} ${OBJ_DIR}
@@ -126,9 +128,9 @@ clean:
 fclean:
 	${RM} ${OBJ_DIR} ${CLT} ${SRV}
 
-re:	fclean all
+re: clean all
 
--include /home/jodufour/Templates/mk_files/coffee.mk
--include /home/jodufour/Templates/mk_files/norm.mk
+fre: fclean all
 
-.PHONY:	all clean fclean re
+-include ${HOME}/Templates/mk_files/coffee.mk
+-include ${HOME}/Templates/mk_files/norm.mk
