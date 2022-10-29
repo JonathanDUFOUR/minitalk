@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 20:50:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/09 08:05:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:41:25 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 static void	mt_success(int sig)
 {
-	write(1, GREEN">>> MESSAGE HAS BEEN WELL RECEIVED <<<"RESET"\n\n", 49);
+	write(1, GREEN_FG">>> MESSAGE HAS BEEN WELL RECEIVED <<<"RESET"\n\n", 49);
 	exit(sig);
 }
 
 static void	mt_error(int sig)
 {
-	write(1, RED">>> ERROR WHILE SENDING THE MESSAGE <<<"RESET"\n\n", 50);
+	write(1, RED_FG">>> ERROR WHILE SENDING THE MESSAGE <<<"RESET"\n\n", 50);
 	exit(sig);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 09:12:49 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/09 17:44:03 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:42:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	flush(char *buff, int *i, __pid_t client_pid)
 	mt_bzero(buff, BUFFER_SIZE);
 	if (*i && !(*i % 8) && !buff[*i / 8 - 1])
 	{
-		write(1, "\n"CYAN"From: ", 12);
+		write(1, "\n"CYAN_FG"From: ", 12);
 		mt_putpid(client_pid);
 		write(1, RESET"\n\n", 6);
 		kill(client_pid, SIGUSR1);

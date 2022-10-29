@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:02:33 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/09 17:41:23 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:41:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	mt_data_print(void)
 	t_data *const	data = mt_data_get();
 
 	write(1, "-----------------------------------------\n", 42);
-	write(1, "      "MAGENTA"VARIABLE"RESET"     |       "\
-	MAGENTA"VALUE"RESET"        \n", 59);
+	write(1, "      "MAGENTA_FG"VARIABLE"RESET"     |       "\
+	MAGENTA_FG"VALUE"RESET"        \n", 59);
 	write(1, "-----------------------------------------\n", 42);
 	write(1, "     server_pid    |       ", 27);
 	mt_putpid(data->srv_pid);
