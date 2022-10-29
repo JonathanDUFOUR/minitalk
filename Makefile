@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 22:30:33 by jodufour          #+#    #+#              #
-#    Updated: 2022/05/19 02:56:34 by jodufour         ###   ########.fr        #
+#    Updated: 2022/10/29 07:21:33 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,24 +27,24 @@ SRV			=	server.out
 #######################################
 #             DIRECTORIES             #
 #######################################
-SRC_DIR		=	srcs/
-OBJ_DIR		=	objs/
-PRV_DIR		=	private/
+SRC_DIR		=	srcs
+OBJ_DIR		=	objs
+PRV_DIR		=	private
 
-SRV_SRC_DIR	:=	server/
+SRV_SRC_DIR	:=	server
 SRV_OBJ_DIR	:=	${SRV_SRC_DIR}
-SRV_SRC_DIR	:=	${addprefix ${SRC_DIR}, ${SRV_SRC_DIR}}
-SRV_OBJ_DIR	:=	${addprefix ${OBJ_DIR}, ${SRV_OBJ_DIR}}
+SRV_SRC_DIR	:=	${addprefix ${SRC_DIR}/, ${SRV_SRC_DIR}}
+SRV_OBJ_DIR	:=	${addprefix ${OBJ_DIR}/, ${SRV_OBJ_DIR}}
 
-CLT_SRC_DIR	:=	client/
+CLT_SRC_DIR	:=	client
 CLT_OBJ_DIR	:=	${CLT_SRC_DIR}
-CLT_SRC_DIR	:=	${addprefix ${SRC_DIR}, ${CLT_SRC_DIR}}
-CLT_OBJ_DIR	:=	${addprefix ${OBJ_DIR}, ${CLT_OBJ_DIR}}
+CLT_SRC_DIR	:=	${addprefix ${SRC_DIR}/, ${CLT_SRC_DIR}}
+CLT_OBJ_DIR	:=	${addprefix ${OBJ_DIR}/, ${CLT_OBJ_DIR}}
 
-CMN_SRC_DIR	:=	common/
+CMN_SRC_DIR	:=	common
 CMN_OBJ_DIR	:=	${CMN_SRC_DIR}
-CMN_SRC_DIR	:=	${addprefix ${SRC_DIR}, ${CMN_SRC_DIR}}
-CMN_OBJ_DIR	:=	${addprefix ${OBJ_DIR}, ${CMN_OBJ_DIR}}
+CMN_SRC_DIR	:=	${addprefix ${SRC_DIR}/, ${CMN_SRC_DIR}}
+CMN_OBJ_DIR	:=	${addprefix ${OBJ_DIR}/, ${CMN_OBJ_DIR}}
 
 ######################################
 #            SOURCE FILES            #
@@ -75,13 +75,13 @@ CMN_SRC		=	\
 #            OBJECT FILES            #
 ######################################
 SRV_OBJ		=	${SRV_SRC:.c=.o}
-SRV_OBJ		:=	${addprefix ${SRV_OBJ_DIR}, ${SRV_OBJ}}
+SRV_OBJ		:=	${addprefix ${SRV_OBJ_DIR}/, ${SRV_OBJ}}
 
 CLT_OBJ		=	${CLT_SRC:.c=.o}
-CLT_OBJ		:=	${addprefix ${CLT_OBJ_DIR}, ${CLT_OBJ}}
+CLT_OBJ		:=	${addprefix ${CLT_OBJ_DIR}/, ${CLT_OBJ}}
 
 CMN_OBJ		=	${CMN_SRC:.c=.o}
-CMN_OBJ		:=	${addprefix ${CMN_OBJ_DIR}, ${CMN_OBJ}}
+CMN_OBJ		:=	${addprefix ${CMN_OBJ_DIR}/, ${CMN_OBJ}}
 
 SRV_DEP		=	${SRV_OBJ:.o=.d}
 CLT_DEP		=	${CLT_OBJ:.o=.d}
@@ -118,7 +118,7 @@ all: ${SRV} ${CLT}
 -include ${CLT_DEP}
 -include ${CMN_DEP}
 
-${OBJ_DIR}%.o: ${SRC_DIR}%.c
+${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	@${MKDIR} ${@D}
 	${CC} $< ${CFLAGS} ${OUTPUT_OPTION}
 
