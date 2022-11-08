@@ -1,8 +1,5 @@
-**
-
-!*/
-!*.c
-!*.h
-!Makefile
-!en.subject.pdf
-!.gitignore
+**.o
+**.d
+**.a
+**.so
+**.out
